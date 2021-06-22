@@ -9,11 +9,28 @@ use PHPUnit\Framework\TestCase;
 
 final class MatchTitleTextTest extends TestCase
 {
-    public function testItShouldMatchIfIssueTitleMatchesWithGivenCriteria(): void
+    /** @dataProvider getChangelogLineSample */
+    public function testItShouldMatchIfIssueTitleMatchesWithGivenCriteria(string $match, string $line, bool $expectedResult): void
     {
         $matchTitleText = new MatchTitleText();
+        $result = $matchTitleText->isSatisfiedBy($match, $line);
 
-        self::assertInstanceOf(MatchTitleText::class, $matchTitleText);
+        self::assertSame($expectedResult, $result);
+    }
+
+    public function getChangelogLineSample(): \Generator
+    {
+        yield 'It should match with when title starts exactly with given string.' => [
+            '[toggle-crud]',
+            '- \[toggle-crud\] Allow adding strategies with segments',
+            true,
+        ];
+
+        yield 'It should not match with when title doesn\'t starts exactly with given string.' => [
+            '[toggle--crud]',
+            '- \[toggle-crud\] Allow adding strategiees with segments',
+            false,
+        ];
     }
 }
     
