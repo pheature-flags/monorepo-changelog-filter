@@ -31,12 +31,22 @@
                 "conditions": []
             },
             {
-                "action": "vendor/bin/phpunit",
+                "action": "vendor/bin/phpcs --standard=psr12 src",
                 "options": [],
                 "conditions": []
             },
             {
-                "action": "vendor/bin/phpcs --standard=psr12 src",
+                "action": "vendor/bin/phpstan analyse src -l7 ",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "vendor/bin/psalm ",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "vendor/bin/phpunit",
                 "options": [],
                 "conditions": []
             }
