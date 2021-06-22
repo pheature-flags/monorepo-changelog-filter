@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66c75d2ee913bf0c14f0b7d270c7f007",
+    "content-hash": "b618711bd88842b2f09b1501fd4520c1",
     "packages": [
         {
             "name": "antidot-fw/cli",
@@ -2974,6 +2974,70 @@
             "time": "2021-03-17T13:42:18+00:00"
         },
         {
+            "name": "phpstan/phpstan",
+            "version": "0.12.90",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan.git",
+                "reference": "f0e4b56630fc3d4eb5be86606d07212ac212ede4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f0e4b56630fc3d4eb5be86606d07212ac212ede4",
+                "reference": "f0e4b56630fc3d4eb5be86606d07212ac212ede4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1|^8.0"
+            },
+            "conflict": {
+                "phpstan/phpstan-shim": "*"
+            },
+            "bin": [
+                "phpstan",
+                "phpstan.phar"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.12-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPStan - PHP Static Analysis Tool",
+            "support": {
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.90"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/phpstan",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/phpstan",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/phpstan/phpstan",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-06-18T07:15:38+00:00"
+        },
+        {
             "name": "phpunit/php-code-coverage",
             "version": "9.2.6",
             "source": {
@@ -3443,6 +3507,57 @@
                 "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
             "time": "2021-05-03T11:20:27+00:00"
+        },
+        {
+            "name": "roave/infection-static-analysis-plugin",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Roave/infection-static-analysis-plugin.git",
+                "reference": "c1e5428a85ff24fa4ca75ac43f29c608d02379fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Roave/infection-static-analysis-plugin/zipball/c1e5428a85ff24fa4ca75ac43f29c608d02379fe",
+                "reference": "c1e5428a85ff24fa4ca75ac43f29c608d02379fe",
+                "shasum": ""
+            },
+            "require": {
+                "infection/infection": "0.23.0",
+                "ocramius/package-versions": "^1.9.0 || ^2.0.0",
+                "php": "~7.4.7|~8.0.0",
+                "sanmai/later": "^0.1.2",
+                "vimeo/psalm": "^4.7.2"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^9.0.0",
+                "phpunit/phpunit": "^9.5.4"
+            },
+            "bin": [
+                "bin/roave-infection-static-analysis-plugin"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Roave\\InfectionStaticAnalysis\\": "src/Roave/InfectionStaticAnalysis"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Pivetta",
+                    "email": "ocramius@gmail.com"
+                }
+            ],
+            "description": "Static analysis on top of mutation testing - prevents escaped mutants from being invalid according to static analysis",
+            "support": {
+                "issues": "https://github.com/Roave/infection-static-analysis-plugin/issues",
+                "source": "https://github.com/Roave/infection-static-analysis-plugin/tree/1.8.0"
+            },
+            "time": "2021-05-13T19:12:14+00:00"
         },
         {
             "name": "sanmai/later",
