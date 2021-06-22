@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Test\Pheature\Changelog\Filter;
 
-use Pheature\Changelog\Filter\MatchTitleText;
+use Pheature\Changelog\Filter\MatchIssueOrPRTitleText;
 use PHPUnit\Framework\TestCase;
 
-final class MatchTitleTextTest extends TestCase
+final class MatchIssueOrPRTitleTextTest extends TestCase
 {
     /** @dataProvider getChangelogLineSample */
     public function testItShouldMatchIfIssueTitleMatchesWithGivenCriteria(string $match, string $line, bool $expectedResult): void
     {
-        $matchTitleText = new MatchTitleText();
+        $matchTitleText = new MatchIssueOrPRTitleText();
         $result = $matchTitleText->isSatisfiedBy($match, $line);
 
         self::assertSame($expectedResult, $result);
