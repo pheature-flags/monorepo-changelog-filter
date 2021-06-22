@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Pheature\Changelog\Filter;
 
-final class MatchTitleText
+final class MatchIssueOrPRTitleText
 {
     private const LINE_TITLE_PATTERN = '`^\-\s%s.*$`';
 
