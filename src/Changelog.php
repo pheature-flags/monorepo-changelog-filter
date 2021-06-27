@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Pheature\Changelog\Filter;
 
-use function Psl\Dict\merge;
+use function Psl\Str\Byte\replace;
 
 final class Changelog
 {
@@ -15,14 +15,18 @@ final class Changelog
      */
     private function __construct(
         private Repository $repository,
+        private Matcher $matcher,
         private array $releases = []
     ) {
     }
 
     public static function createForRepository(string $repositoryName): self
     {
+        $repositoryName = Repository::named($repositoryName);
+
         return new self(
-            Repository::named($repositoryName)
+            $repositoryName,
+            new Matcher($repositoryName->package())
         );
     }
 
@@ -31,12 +35,12 @@ final class Changelog
         $chunkedChangelog = $fullChangelog;
         $releases = [];
         while (null !== ($release = Release::slice($chunkedChangelog))) {
-            $releases[] = Release::fromMarkdown($release);
+            $releases[] = Release::fromMarkdown($release, $this->matcher);
 
-            $chunkedChangelog = str_replace($release, '', $chunkedChangelog);
+            $chunkedChangelog = replace($chunkedChangelog, $release, '');
         }
 
-        return new self($this->repository, $releases);
+        return new self($this->repository, $this->matcher, $releases);
     }
 
     public function repository(): Repository
@@ -50,5 +54,22 @@ final class Changelog
     public function releases(): array
     {
         return $this->releases;
+    }
+
+    public function parse(): string
+    {
+        $releasesMarkdown = '';
+        foreach ($this->releases() as $release) {
+            $releasesMarkdown .= $release->parse();
+        }
+
+        $releasesMarkdown = \Psl\Str\trim($releasesMarkdown);
+
+        return <<<MARKDOWN
+        # Changelog
+
+        $releasesMarkdown
+        
+        MARKDOWN;
     }
 }
