@@ -4,13 +4,56 @@
 declare(strict_types=1);
 
 use Antidot\Cli\Application\Console;
+use Pheature\Changelog\Filter\Changelog;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 set_time_limit(0);
+ini_set( 'pcre.backtrack_limit', '10000000' );
 
 call_user_func(static function (): void {
     require __DIR__.'/../vendor/autoload.php';
     $container = require __DIR__.'/../config/container.php';
+    /** @var Console $console */
     $console = $container->get(Console::class);
+
+    $command = new class extends Command
+    {
+        protected function configure(): void
+        {
+            $this->setName('changelog:filter');
+            $this->setDescription('Filters changelog by given keywords.');
+            $this->addArgument(
+                    'repository',
+                    InputArgument::REQUIRED,
+                'Name of the repository to get issues from'
+            );
+            $this->addArgument(
+                    'changelog',
+                    InputArgument::REQUIRED,
+                'Output of monorepo full changelog'
+            );
+        }
+
+        protected function execute(InputInterface $input, OutputInterface $output): int
+        {
+            $changelog = Changelog::createForRepository(
+                    $input->getArgument('repository')
+            );
+            $changelog = $changelog->fromMarkdownChangelog(
+                    $input->getArgument('changelog')
+            );
+
+            $output->write($changelog->parse());
+
+            return Command::SUCCESS;
+        }
+    };
+
+    $console->addCommands([$command]);
+    $console->setDefaultCommand('changelog:filter');
 
     $console->run();
 });

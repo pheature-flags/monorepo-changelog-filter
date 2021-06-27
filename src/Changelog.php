@@ -9,8 +9,6 @@ use function Psl\Str\Byte\replace;
 final class Changelog
 {
     /**
-     * Changelog constructor.
-     * @param Repository $repository
      * @param Release[] $releases
      */
     private function __construct(
@@ -32,7 +30,7 @@ final class Changelog
 
     public function fromMarkdownChangelog(string $fullChangelog): self
     {
-        $chunkedChangelog = $fullChangelog;
+        $chunkedChangelog = $fullChangelog . PHP_EOL;
         $releases = [];
         while (null !== ($release = Release::slice($chunkedChangelog))) {
             $releases[] = Release::fromMarkdown($release, $this->matcher);
