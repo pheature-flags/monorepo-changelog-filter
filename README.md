@@ -20,13 +20,13 @@ formatted as `[toggle-crud-psr7-api] Issue or pull request tittle`
 
 **Closed issues:**
 
-- \[toggle-psr11-factories\] Add psalm badge [\#246](https://github.com/pheature-flags/pheature-flags/issues/246)
-- \[toggle-psr11-factories\] Add mutation badge  [\#245](https://github.com/pheature-flags/pheature-flags/issues/245)
-- \[toggle-psr11-factories\] Add Packagist download badge [\#244](https://github.com/pheature-flags/pheature-flags/issues/244)
-- \[toggle-psr11-factories\] Add Code climate badge [\#243](https://github.com/pheature-flags/pheature-flags/issues/243)
-- \[toggle-psr11-factories\] Fix dependency issues [\#242](https://github.com/pheature-flags/pheature-flags/issues/242)
-- \[toggle-psr11-factories\] Add Scrutinizer badge  [\#241](https://github.com/pheature-flags/pheature-flags/issues/241)
-- \[toggle-psr11-factories\] Add Codecov badge [\#240](https://github.com/pheature-flags/pheature-flags/issues/240)
+- \[toggle-crud-psr11-factories\] Add psalm badge [\#246](https://github.com/pheature-flags/pheature-flags/issues/246)
+- \[toggle-crud-psr11-factories\] Add mutation badge  [\#245](https://github.com/pheature-flags/pheature-flags/issues/245)
+- \[toggle-crud-psr11-factories\] Add Packagist download badge [\#244](https://github.com/pheature-flags/pheature-flags/issues/244)
+- \[toggle-crud-psr11-factories\] Add Code climate badge [\#243](https://github.com/pheature-flags/pheature-flags/issues/243)
+- \[toggle-crud-psr11-factories\] Fix dependency issues [\#242](https://github.com/pheature-flags/pheature-flags/issues/242)
+- \[toggle-crud-psr11-factories\] Add Scrutinizer badge  [\#241](https://github.com/pheature-flags/pheature-flags/issues/241)
+- \[toggle-crud-psr11-factories\] Add Codecov badge [\#240](https://github.com/pheature-flags/pheature-flags/issues/240)
 - \[toggle-crud-psr7-api\] Add maintainability badge  [\#238](https://github.com/pheature-flags/pheature-flags/issues/238)
 
 **Merged pull requests:**
@@ -43,5 +43,29 @@ formatted as `[toggle-crud-psr7-api] Issue or pull request tittle`
 ```
 
 ```bash
-cat CHANGELOG.md | bin/console pheature:changelog:filter "[toggle-crud-psr7-api]"
+bin/console pheature:changelog:filter pheature/toggle-crud-psr7-api "$(cat CHANGELOG.md)"
+```
+Will give the next output
+
+```markdown
+# Changelog
+
+## [Unreleased](https://github.com/pheature-flags/pheature-flags/tree/HEAD)
+
+[Full Changelog](https://github.com/pheature-flags/pheature-flags/compare/v0.1.1...HEAD)
+
+**Fixed bugs:**
+
+- \[toggle-crud-psr7-api\] fix typo [\#262](https://github.com/pheature-flags/pheature-flags/pull/262) ([kpicaza](https://github.com/kpicaza))
+
+**Closed issues:**
+
+- \[toggle-crud-psr7-api\] Add maintainability badge  [\#238](https://github.com/pheature-flags/pheature-flags/issues/238)
+
+**Merged pull requests:**
+
+- \[toggle-crud-psr7-api\] add codeclimate badge [\#239](https://github.com/pheature-flags/pheature-flags/pull/239) ([kpicaza](https://github.com/kpicaza))
+- \[toggle-crud-psr7-api\] add scrutinizer badge [\#237](https://github.com/pheature-flags/pheature-flags/pull/237) ([kpicaza](https://github.com/kpicaza))
+- \[toggle-crud-psr7-api\] add codecov badge [\#236](https://github.com/pheature-flags/pheature-flags/pull/236) ([kpicaza](https://github.com/kpicaza))
+- \[toggle-crud-psr7-api\] add striker mutation badge [\#235](https://github.com/pheature-flags/pheature-flags/pull/235) ([kpicaza](https://github.com/kpicaza))
 ```
