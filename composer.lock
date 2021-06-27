@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b618711bd88842b2f09b1501fd4520c1",
+    "content-hash": "7b4ddb85e72f4f7edafd8389bdf1d311",
     "packages": [
         {
             "name": "antidot-fw/cli",
@@ -131,6 +131,63 @@
                 }
             ],
             "time": "2021-01-10T11:32:35+00:00"
+        },
+        {
+            "name": "azjezz/psl",
+            "version": "1.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/azjezz/psl.git",
+                "reference": "0a2149e427fe91ec0d3024583d35ce9fe3034c33"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/azjezz/psl/zipball/0a2149e427fe91ec0d3024583d35ce9fe3034c33",
+                "reference": "0a2149e427fe91ec0d3024583d35ce9fe3034c33",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "ext-intl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-sodium": "*",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "psalm": {
+                    "pluginClass": "Psl\\Integration\\Psalm\\Plugin"
+                },
+                "thanks": {
+                    "name": "hhvm/hsl",
+                    "url": "https://github.com/hhvm/hsl"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psl\\Integration\\": "integration"
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "azjezz",
+                    "email": "azjezz@protonmail.com"
+                }
+            ],
+            "description": "PHP Standard Library",
+            "support": {
+                "issues": "https://github.com/azjezz/psl/issues",
+                "source": "https://github.com/azjezz/psl/tree/1.7.2"
+            },
+            "time": "2021-05-24T20:30:20+00:00"
         },
         {
             "name": "brick/varexporter",

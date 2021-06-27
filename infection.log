@@ -9,3 +9,48 @@ Skipped mutants:
 
 Not Covered mutants:
 ====================
+
+1) /home/kpicaza/server/changelog-aplitter/src/Release.php:63    [M] PublicVisibility
+
+--- Original
++++ New
+@@ @@
+         }
+         return (string) last($match);
+     }
+-    public function version() : string
++    protected function version() : string
+     {
+         return $this->version;
+     }
+
+
+2) /home/kpicaza/server/changelog-aplitter/src/Repository.php:28    [M] PublicVisibility
+
+--- Original
++++ New
+@@ @@
+         [, $owner, $package] = $match;
+         return new self($owner, $package);
+     }
+-    public function owner() : string
++    protected function owner() : string
+     {
+         return $this->owner;
+     }
+
+
+3) /home/kpicaza/server/changelog-aplitter/src/Repository.php:33    [M] PublicVisibility
+
+--- Original
++++ New
+@@ @@
+     {
+         return $this->owner;
+     }
+-    public function package() : string
++    protected function package() : string
+     {
+         return $this->package;
+     }
+ }
