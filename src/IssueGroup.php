@@ -14,8 +14,6 @@ use function Psl\Vec\map;
 final class IssueGroup
 {
     /**
-     * IssueGroup constructor.
-     * @param string $type
      * @param array<string> $issues
      */
     private function __construct(
@@ -29,7 +27,7 @@ final class IssueGroup
         $match = every_match($markdownIssues, '`(\-\s.*)+`i', capture_groups([1]));
         invariant(null !== $match, 'At least one issue is required');
         $issues = map($match, static fn(array $issue): string => (string)last($issue));
-        $issues = filter($issues, static fn(string $issue) => $matcher->match($issue));
+        $issues = filter($issues, static fn(string $issue): bool => $matcher->match($issue));
 
         return new self($type, $issues);
     }
