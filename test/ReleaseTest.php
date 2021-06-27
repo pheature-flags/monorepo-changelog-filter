@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Test\Pheature\Changelog\Filter;
 
+use Pheature\Changelog\Filter\Matcher;
 use Pheature\Changelog\Filter\Release;
 use PHPUnit\Framework\TestCase;
 
 final class ReleaseTest extends TestCase
 {
+    private const PACKAGE = 'toggle-crud-psr11-factories';
     private const RELEASE = <<<MARKDOWN
     ## [Unreleased](https://github.com/pheature-flags/pheature-flags/tree/HEAD)
 
@@ -21,8 +23,8 @@ final class ReleaseTest extends TestCase
 
     **Closed issues:**
     
-    - \[toggle-psr11-factories\] Add psalm badge [\#246](https://github.com/pheature-flags/pheature-flags/issues/246)
-    - \[toggle-psr11-factories\] Add mutation badge  [\#245](https://github.com/pheature-flags/pheature-flags/issues/245)
+    - \[toggle-crud-psr11-factories\] Add psalm badge [\#246](https://github.com/pheature-flags/pheature-flags/issues/246)
+    - \[toggle-crud-psr11-factories\] Add mutation badge  [\#245](https://github.com/pheature-flags/pheature-flags/issues/245)
     - \[toggle-crud-psr7-api\] Add maintainability badge  [\#238](https://github.com/pheature-flags/pheature-flags/issues/238)
     - Add Infection Mutation testing coverage Badge to Toggle CRUD PSR-7 API package [\#81](https://github.com/pheature-flags/pheature-flags/issues/81)
     
@@ -37,11 +39,11 @@ final class ReleaseTest extends TestCase
 
     public function testItShouldBeCreatedFromMarkdown(): void
     {
-        $release = Release::fromMarkdown(self::RELEASE);
+        $release = Release::fromMarkdown(self::RELEASE, new Matcher(self::PACKAGE));
         self::assertSame(
             '## [Unreleased](https://github.com/pheature-flags/pheature-flags/tree/HEAD)',
             $release->title()
         );
-        self::assertCount(3, $release->issues());
+        self::assertCount(2, $release->issueGroups());
     }
 }

@@ -9,28 +9,34 @@ use function Psl\Iter\last;
 use function Psl\Regex\capture_groups;
 use function Psl\Regex\every_match;
 use function Psl\Regex\first_match;
+use function Psl\Vec\filter;
 use function Psl\Vec\map_with_key;
+use function Psl\Vec\values;
 
 final class Release
 {
     /**
      * Release constructor.
-     * @param string $version
      * @param string $title
-     * @param IssueGroup[] $issues
+     * @param string $link
+     * @param IssueGroup[] $issueGroups
      */
     private function __construct(
-        private string $version,
         private string $title,
-        private array $issues,
+        private string $link,
+        private array $issueGroups,
     ) {
     }
 
-    public static function fromMarkdown(string $release): self
+    public static function fromMarkdown(string $release, Matcher $matcher): self
     {
-        $match = first_match($release, '`^(\#\#\s\[([a-z0-9\-\_\.]+)\]\(.*\))$`mi', capture_groups([1, 2]));
+        $match = first_match($release, '`^(\#\#\s\[([a-z0-9\-\_\.]+)\]\(.*\))$`mi', capture_groups([1]));
         invariant(null !== $match, 'Invalid release title given.');
-        [, $title, $version] = $match;
+        $title = (string)last($match);
+
+        $match = first_match($release, '`^(\[Full Changelog\]\(.*\))$`mi', capture_groups([1]));
+        invariant(null !== $match, 'Invalid release link given.');
+        $link = (string)last($match);
 
         /** @var array<int, array<string>> $match */
         $match = every_match($release, '`^(\*\*.*\*\*)$`misU', capture_groups([1]));
@@ -42,12 +48,13 @@ final class Release
         );
         $issues = map_with_key(
             $match,
-            static function (int $key, array $type) use ($match1): IssueGroup {
-                return IssueGroup::fromMarkdown((string)last($type), (string)last($match1[$key]));
+            static function (int $key, array $type) use ($match1, $matcher): IssueGroup {
+                return IssueGroup::fromMarkdown((string)last($type), (string)last($match1[$key]), $matcher);
             }
         );
+        $issues = filter($issues, static fn(IssueGroup $issueGroup) => [] !== $issueGroup->issues());
 
-        return new self($version, $title, $issues);
+        return new self($title, $link, values($issues));
     }
 
     public static function slice(string $fullChangelog): ?string
@@ -60,11 +67,6 @@ final class Release
         return (string)last($match);
     }
 
-    public function version(): string
-    {
-        return $this->version;
-    }
-
     public function title(): string
     {
         return $this->title;
@@ -73,8 +75,24 @@ final class Release
     /**
      * @return IssueGroup[]
      */
-    public function issues(): array
+    public function issueGroups(): array
     {
-        return $this->issues;
+        return $this->issueGroups;
+    }
+
+    public function parse(): string
+    {
+        $issuesMarkdown = '';
+        foreach ($this->issueGroups as $issue) {
+            $issuesMarkdown .= $issue->parse();
+        }
+
+        return <<<MARKDOWN
+        $this->title
+        
+        $this->link
+        
+        $issuesMarkdown
+        MARKDOWN;
     }
 }
